@@ -17,6 +17,15 @@
       "comment": "Reused Mobile.",
       "date": "2023-04-18T18:30:00.000Z",
       "id": 2
+    },
+    {
+      "productName": "Nokia A 512",
+      "category": "Electronics",
+      "freshness": "Refurbished",
+      "price": 1000,
+      "comment": "Old Model",
+      "date": "2023-05-16T18:30:00.000Z",
+      "id": 5
     }
   ],
   "comments": [

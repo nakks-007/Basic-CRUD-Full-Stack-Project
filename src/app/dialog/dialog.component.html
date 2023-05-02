@@ -28,8 +28,7 @@
         <mat-radio-button
           *ngFor="let fresh of freshnessList"
           [value]="fresh"
-          class="example-radio-button"
-        >
+          class="example-radio-button">
           {{ fresh }}
         </mat-radio-button>
       </mat-radio-group>
@@ -48,5 +47,5 @@
 
 <div mat-dialog-action [align]="'end'">
   <button mat-raised-button color="warn" mat-dialog-close="">Close</button>
-  <button style="margin-left: 10px;" mat-raised-button color="primary"(click)="addProduct()">Save</button>
+  <button style="margin-left: 10px;" mat-raised-button color="primary"(click)="addProduct()">{{actionBtn}}</button>
 </div>

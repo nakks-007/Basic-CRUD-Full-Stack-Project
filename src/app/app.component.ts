@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { ApiService } from './services/api.service';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,15 @@ import {MatTableDataSource} from '@angular/material/table';
 export class AppComponent implements OnInit {
   title = 'CRUD';
 
-  displayedColumns: string[] = ['productName', 'category', 'date', 'freshness', 'price', 'comment', 'action'];
+  displayedColumns: string[] = [
+    'productName',
+    'category',
+    'date',
+    'freshness',
+    'price',
+    'comment',
+    'action',
+  ];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -27,9 +35,16 @@ export class AppComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(DialogComponent, {
-      width: '30%',
-    });
+    this.dialog
+      .open(DialogComponent, {
+        width: '30%',
+      })
+      .afterClosed()
+      .subscribe((val) => {
+        if (val === 'save') {
+          this.getAllProducts();
+        }
+      });
   }
 
   getAllProducts() {
@@ -41,16 +56,34 @@ export class AppComponent implements OnInit {
       },
       error: (err) => {
         alert('Error while fetching the records');
+        console.log(err);
       },
     });
   }
 
-  editProduct(row : any) {
-    this.dialog.open(DialogComponent, {
-      width: '30%',
-      data: row
-    });
+  editProduct(row: any) {
+    this.dialog
+      .open(DialogComponent, {
+        width: '30%',
+        data: row,
+      })
+      .afterClosed()
+      .subscribe((val) => {
+        if (val === 'update') {
+          this.getAllProducts();
+        }
+      });
+  }
 
+  deleteProduct(id: number) {
+    return this.api.deleteProduct(id).subscribe({
+      next:(res)=>{
+        alert("Product Deleted Successfully")
+        this.getAllProducts();
+      }, error:()=> {
+        alert("Error while Deleting the Product");
+      }
+    })
   }
 
   applyFilter(event: Event) {
@@ -61,5 +94,4 @@ export class AppComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
 }

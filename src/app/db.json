@@ -26,6 +26,15 @@
       "comment": "Old Model",
       "date": "2023-05-16T18:30:00.000Z",
       "id": 5
+    },
+    {
+      "productName": "Beetroot",
+      "category": "Vegetables",
+      "freshness": "Refurbished",
+      "price": 35,
+      "comment": "Farm-based Vegetable",
+      "date": "2023-05-02T18:30:00.000Z",
+      "id": 6
     }
   ],
   "comments": [
